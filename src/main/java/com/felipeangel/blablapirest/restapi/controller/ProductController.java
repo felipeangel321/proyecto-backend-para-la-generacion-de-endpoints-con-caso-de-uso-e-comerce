@@ -3,6 +3,7 @@ package com.felipeangel.blablapirest.restapi.controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.felipeangel.blablapirest.restapi.model.Boleta;
@@ -27,5 +28,28 @@ public class ProductController {
         return new Boleta(getProducts(), getProducts(), null, id, getProducts());
     }
 
-    
+    @GetMapping("/ProductoCategoria")
+    public String getProductoCategoria(
+        @RequestParam(required= false) String categoria,
+        @RequestParam(defaultValue = "0") int precioMin,
+        @RequestParam(defaultValue = "10000") int precioMax
+    ){
+        return "productos filtrados por: "+
+        "categoria="+(categoria !=null ? categoria : "todas" ) + 
+        "\n,precio min ="+ precioMin +
+        "\n,precio max = " + precioMax ;
+
+
+    //@GetMapping("/productos")
+//public String listarProductos(
+//@RequestParam(required = false) String categoria,
+//@RequestParam(defaultValue = "nombre") String ordenarPor,
+//@RequestParam(defaultValue = "10") int limite) {
+//return "Lista de productos filtrados por: " +
+//"categoría=" + (categoria != null ? categoria : "todas") +
+//", ordenados por=" + ordenarPor +
+//", límite=" + limite
+
+
+    }
 }
